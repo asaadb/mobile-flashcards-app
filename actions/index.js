@@ -1,17 +1,17 @@
-export const RECIEVE_DICKS = 'RECIEVE_DICKS'
-export const ADD_DICK = 'ADD_DICK'
+export const RECIEVE_DECKS = 'RECIEVE_DECKS'
+export const ADD_DECK = 'ADD_DECK'
 export const ADD_CARD = 'ADD_CARD'
 
-export function receiveDicks(dicks) {
+export function receiveDecks(decks) {
   return {
-    type: RECIEVE_DICKS,
-    dicks,
+    type: RECIEVE_DECKS,
+    decks,
   }
 }
-export function addDick(dick) {
+export function addDeck(deck) {
   return {
-    type: ADD_DICK,
-    dick,
+    type: ADD_DECK,
+    deck,
   }
 }
 export function addCard(card, id) {

@@ -6,14 +6,14 @@ import {
   KeyboardAvoidingView,
   Alert,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from "react-native";
-import { white, lightBlue } from "../utils/colors";
+import { white, lightGray, purple} from "../utils/colors";
 import { addDeck } from "../actions";
 import { submitDeck } from "../utils/api";
 import { connect } from "react-redux";
 import { formatDeck } from "../utils/helpers";
-
 class AddDeck extends React.Component {
   state = {
     title: ""
@@ -21,7 +21,7 @@ class AddDeck extends React.Component {
   handleSubmit = () => {
     const { title } = this.state;
     if (!title || title === "") {
-      Alert.alert("Please Enter a Title For your New Deck");
+        return Alert.alert("Please Enter a Title For your New Deck");
     }
     console.log("Submit title: ", title);
     const { dispatch } = this.props;
@@ -42,19 +42,64 @@ class AddDeck extends React.Component {
   render() {
     console.log("Props ", this.props);
     return (
-      <KeyboardAvoidingView>
-        <Text>What is the title of your new deck?</Text>
+      <KeyboardAvoidingView style={styles.container}>
+        <Text style={{ fontSize: 31, margin: 40, textAlign:'center', color:purple }}>What is the title of your new deck?</Text>
         <TextInput
           autoFocus
           placeholder="Deck Name"
           value={this.state.title}
           onChangeText={this.handleChange}
+          style={styles.textInput}
         />
-        <TouchableOpacity onPress={this.handleSubmit}>
-          <Text>SUBMIT</Text>
+        <TouchableOpacity style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn} onPress={this.handleSubmit}>
+          <Text style={styles.submitBtnText}>SUBMIT</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: lightGray,
+    alignItems: "center",
+    justifyContent:'center',
+  },
+iosSubmitBtn: {
+  backgroundColor: purple,
+  padding: 10,
+  paddingLeft: 30,
+  paddingRight: 30,
+  borderRadius: 7,
+  height: 45,
+  marginLeft: 40,
+  marginRight: 40,
+
+},
+AndroidSubmitBtn: {
+  backgroundColor: purple,
+  padding: 10,
+  paddingLeft: 30,
+  paddingRight: 30,
+  height: 45,
+  borderRadius: 2,
+  alignSelf: 'flex-end',
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+submitBtnText: {
+  fontSize: 22,
+  textAlign: 'center',
+  color:white,
+},
+textInput: {
+  backgroundColor:white,
+  minWidth:300,
+  borderRadius: 5,
+  padding:10,
+  fontSize: 24,
+  margin: 5,
+  marginBottom:40,
+},
+});
 export default connect()(AddDeck);

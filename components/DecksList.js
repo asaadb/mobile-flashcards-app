@@ -9,8 +9,9 @@ import {
 import { connect } from "react-redux";
 import { receiveDecks } from "../actions";
 import { fetchDecks } from "../utils/api";
+import { clearAsyncStorage } from "../utils/api";
 import { AppLoading } from "expo";
-import { white, lightBlue, gray, black } from "../utils/colors";
+import { white, lightGray, gray, black } from "../utils/colors";
 
 class DecksList extends React.Component {
   state = {
@@ -35,12 +36,15 @@ class DecksList extends React.Component {
     return (
       <View style={styles.container}>
         {keys.map(key => (
-          <TouchableOpacity key={key} style={styles.decks}>
-            <Text style={{ color: black, fontSize: 28, margin: 5 }}>
+          <TouchableOpacity key={key} style={styles.decks} onPress={() => this.props.navigation.navigate(
+              'DeckDetail',
+              { entryId: key }
+            )}>
+            <Text style={styles.title}>
               {decks[key].title}
             </Text>
             <Text style={{ color: gray, fontSize: 18 }}>
-              {decks[key].questions.length} cards
+              {decks[key].questions ? decks[key].questions.length : 0} Cards
             </Text>
           </TouchableOpacity>
         ))}
@@ -52,8 +56,8 @@ class DecksList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: lightBlue,
-    alignItems: "stretch"
+    backgroundColor: lightGray,
+    alignItems: "stretch",
   },
   decks: {
     backgroundColor: white,
@@ -70,8 +74,9 @@ const styles = StyleSheet.create({
     shadowOffset: {
       width: 0,
       height: 3
-    }
-  }
+    },
+  },
+  title: { color: black, fontSize: 28, margin: 5, textAlign:'center' }
 });
 
 function mapStateToProps(decks) {

@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, Platform } from "react-native";
 import DecksList from "./components/DecksList";
 import AddDeck from "./components/AddDeck";
+import DeckDetail from "./components/DeckDetail";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
@@ -50,7 +51,26 @@ const Tabs = createBottomTabNavigator(
     }
   }
 );
-const TabsContainer = createAppContainer(Tabs);
+
+const MainNavigator = createStackNavigator({
+  home: {
+    screen: Tabs,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    }),
+  },
+})
+
+const TabsContainer = createAppContainer(MainNavigator);
 
 export default class App extends React.Component {
   render() {

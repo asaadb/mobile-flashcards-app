@@ -7,14 +7,16 @@ export function fetchDecks() {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
   .then(formatResults)
 }
-// export function saveDeck({deck, id}) {
-//   return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
-//       [id]: deck
-//     }))
-//     .then(results => {
-//       console.log('Results: ', results)
-//     })
-// }
+export function submitDeck(deck) {
+  return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(deck))
+    .then(results => {
+      console.log('Results: ', results)
+    })
+}
+export function clearAsyncStorage () {
+   AsyncStorage.clear();
+}
+
 
 // export function removeDeck() {
 //   return AsyncStorage.getItem(DECKS_STORAGE_KEY)

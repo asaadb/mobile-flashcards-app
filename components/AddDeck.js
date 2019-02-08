@@ -26,19 +26,22 @@ class AddDeck extends React.Component {
     console.log("Submit title: ", title);
     const { dispatch } = this.props;
     const newDeck = formatDeck(title)
+    const entryId = Object.keys(newDeck)[0]
     dispatch(addDeck(newDeck));
     this.setState(() => ({
       title: ""
     }));
-
-    // update "DB"
     submitDeck(newDeck)
+    this.toDeckDetail(entryId)
   };
   handleChange = text => {
     this.setState({
       title: text
     });
   };
+  toDeckDetail = (entryId) => {
+    this.props.navigation.navigate('DeckDetail', { entryId: entryId} )
+}
   render() {
     console.log("Props ", this.props);
     return (

@@ -38,7 +38,7 @@ export function formatDeck (title) {
   const id = generateUID()
   return {
     [id]:{
-      title: id,
+      title: title,
       questions:[],
     }
   }

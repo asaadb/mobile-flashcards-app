@@ -9,10 +9,6 @@ import {
 import { connect } from "react-redux";
 
 class DeckDetail extends Component {
-//   toAddCard = () => {
-//     console.log('pressed', this.props.navigation);
-//     this.props.navigation.navigate('AddCard', { entryId: this.props.entryId} )
-// }
     render() {
       console.log("Props ", this.props)
       const { title, questions } = this.props.deck
@@ -23,7 +19,10 @@ class DeckDetail extends Component {
           <Text>{title}</Text>
           <Text>{questions ? questions.length: 0} Cards </Text>
           {questions.length > 0 &&
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate(
+              'Quiz',
+              { entryId: entryId}
+            )}>
             <Text>Start Quiz</Text>
           </TouchableOpacity>
           }

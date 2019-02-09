@@ -49,6 +49,7 @@ class Quiz extends Component {
       const currentQuestion = questions[currentIndex];
       return (
         <View>
+          <Text>{`${currentIndex + 1} / ${questions.length}`}</Text>
           <Text>
             {showQuestion
               ? `Question: ${currentQuestion.question}`

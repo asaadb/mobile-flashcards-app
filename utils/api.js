@@ -16,23 +16,10 @@ export function submitDeck(deck) {
 export function clearAsyncStorage () {
    AsyncStorage.clear();
 }
-
-
-// export function removeDeck() {
-//   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-//     .then(results => {
-//       console.log('Results: ', results)
-//     })
-// }
-// export function saveCard() {
-//   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-//     .then(results => {
-//       console.log('Results: ', results)
-//     })
-// }
-// export function removeCard() {
-//   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-//     .then(results => {
-//       console.log('Results: ', results)
-//     })
-// }
+export function submitCard(card, id) {
+  AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
+    const data = JSON.parse(results);
+    data[id].questions.push(card)
+    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data));
+  });
+}

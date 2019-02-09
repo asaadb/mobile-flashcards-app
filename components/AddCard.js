@@ -12,6 +12,7 @@ import {
 import { white, lightGray, purple } from "../utils/colors";
 import { addCard } from "../actions";
 import { connect } from "react-redux";
+import { submitCard } from '../utils/api'
 
 class AddCard extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -39,8 +40,9 @@ class AddCard extends React.Component {
       question: "",
       answer: ""
     }));
+    
     this.toDeckDetail(entryId)
-    // update "DB"
+    submitCard(card, entryId)
   };
   toDeckDetail = (entryId) => {
     this.props.navigation.navigate('DeckDetail', { entryId: entryId} )

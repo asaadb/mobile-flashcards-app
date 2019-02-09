@@ -34,6 +34,12 @@ class Quiz extends Component {
       };
     });
   };
+  toggle = () => {
+    this.setState(state => ({
+      showQuestion:!state.showQuestion
+    })
+  )
+  }
   render() {
     const { currentIndex } = this.state;
     const { showQuestion } = this.state;
@@ -46,8 +52,15 @@ class Quiz extends Component {
           <Text>
             {showQuestion
               ? `Question: ${currentQuestion.question}`
-              : `Answer: ${currentQuestion.answer}`}{" "}
+              : `Answer: ${currentQuestion.answer}`}
           </Text>
+          <TouchableOpacity onPress={this.toggle}>
+          {showQuestion ?
+            <Text>Answer</Text>
+            :
+            <Text>Question</Text>
+          }
+          </TouchableOpacity>
           <TouchableOpacity onPress={this.correct}>
             <Text>Correct</Text>
           </TouchableOpacity>

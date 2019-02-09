@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Platform } from "react-native";
 import DecksList from "./components/DecksList";
 import AddDeck from "./components/AddDeck";
 import AddCard from "./components/AddCard";
+import Quiz from "./components/Quiz";
 import DeckDetail from "./components/DeckDetail";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
@@ -72,7 +73,10 @@ const MainNavigator = createStackNavigator({
   },
   AddCard : {
     screen: AddCard,
-  }
+  },
+  Quiz : {
+    screen: Quiz,
+  },
 })
 
 const TabsContainer = createAppContainer(MainNavigator);

@@ -39,10 +39,12 @@ class AddCard extends React.Component {
       question: "",
       answer: ""
     }));
-
+    this.toDeckDetail(entryId)
     // update "DB"
   };
-
+  toDeckDetail = (entryId) => {
+    this.props.navigation.navigate('DeckDetail', { entryId: entryId} )
+}
   render() {
     return (
       <KeyboardAvoidingView>

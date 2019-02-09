@@ -18,5 +18,6 @@ export function addCard(card, id) {
   return {
     type: ADD_CARD,
     card,
+    id,
   }
 }

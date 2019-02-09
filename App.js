@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, Platform } from "react-native";
 import DecksList from "./components/DecksList";
 import AddDeck from "./components/AddDeck";
+import AddCard from "./components/AddCard";
 import DeckDetail from "./components/DeckDetail";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
@@ -57,6 +58,7 @@ const MainNavigator = createStackNavigator({
     screen: Tabs,
     navigationOptions: {
       header: null,
+      title: 'Decks',
     },
   },
   DeckDetail: {
@@ -68,6 +70,9 @@ const MainNavigator = createStackNavigator({
       },
     }),
   },
+  AddCard : {
+    screen: AddCard,
+  }
 })
 
 const TabsContainer = createAppContainer(MainNavigator);

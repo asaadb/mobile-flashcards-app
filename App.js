@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, Platform } from "react-native";
+import { StyleSheet, Text, View, Platform, StatusBar } from "react-native";
+import { Constants } from 'expo'
 import DecksList from "./components/DecksList";
 import AddDeck from "./components/AddDeck";
 import AddCard from "./components/AddCard";
@@ -11,6 +12,14 @@ import reducer from "./reducers";
 import { white, lightBlue, purple } from './utils/colors'
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from "react-navigation";
+
+function AppStatusBar ({backgroundColor, ...props}) {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 const Tabs = createBottomTabNavigator(
   {
@@ -86,6 +95,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
+          <AppStatusBar backgroundColor={purple} barStyle="light-content" />
           <TabsContainer />
         </View>
       </Provider>

@@ -14,6 +14,7 @@ import { addDeck } from "../actions";
 import { submitDeck } from "../utils/api";
 import { connect } from "react-redux";
 import { formatDeck } from "../utils/helpers";
+
 class AddDeck extends React.Component {
   state = {
     title: ""
@@ -45,7 +46,7 @@ class AddDeck extends React.Component {
   render() {
     console.log("Props ", this.props);
     return (
-      <KeyboardAvoidingView style={styles.container}>
+      <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
         <Text style={{ fontSize: 31, margin: 40, textAlign:'center', color:purple }}>What is the title of your new deck?</Text>
         <TextInput
           autoFocus
@@ -103,6 +104,7 @@ textInput: {
   fontSize: 24,
   margin: 5,
   marginBottom:40,
+  borderWidth: 0.5,
 },
 });
 export default connect()(AddDeck);

@@ -12,14 +12,14 @@ import {
 import { white, lightGray, purple } from "../utils/colors";
 import { addCard } from "../actions";
 import { connect } from "react-redux";
-import { submitCard } from '../utils/api'
+import { submitCard } from "../utils/api";
 
 class AddCard extends React.Component {
   static navigationOptions = ({ navigation }) => {
-        return {
-            title: 'Add a New Card'
-        }
-    }
+    return {
+      title: "Add a New Card"
+    };
+  };
   state = {
     question: "",
     answer: ""
@@ -34,43 +34,87 @@ class AddCard extends React.Component {
     }
     const { dispatch } = this.props;
     const card = { question: question, answer: answer };
-    const {entryId }= this.props;
+    const { entryId } = this.props;
     dispatch(addCard(card, entryId));
     this.setState(() => ({
       question: "",
       answer: ""
     }));
 
-    this.toDeckDetail(entryId)
-    submitCard(card, entryId)
+    this.toDeckDetail(entryId);
+    submitCard(card, entryId);
   };
-  toDeckDetail = (entryId) => {
-    this.props.navigation.navigate('DeckDetail', { entryId: entryId} )
-}
+  toDeckDetail = entryId => {
+    this.props.navigation.navigate("DeckDetail", { entryId: entryId });
+  };
   render() {
     return (
-      <KeyboardAvoidingView>
-        <Text>Add a question</Text>
-        <TextInput
-          autoFocus
-          placeholder="Enter a Question"
-          value={this.state.question}
-          onChangeText={question => this.setState({ question })}
-        />
-        <Text>Add an answer</Text>
-        <TextInput
-          autoFocus
-          placeholder="enter an Answer"
-          value={this.state.answer}
-          onChangeText={answer => this.setState({ answer })}
-        />
-        <TouchableOpacity onPress={this.handleSubmit}>
-          <Text >SUBMIT</Text>
+      <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
+        <View style={{ marginTop: 45 }}>
+          <Text style={styles.label}>Question:</Text>
+          <TextInput
+            autoFocus
+            style={styles.input}
+            placeholder="Enter a Question"
+            value={this.state.question}
+            onChangeText={question => this.setState({ question })}
+          />
+        </View>
+        <View>
+          <Text style={styles.label}>Answer:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter an Answer"
+            value={this.state.answer}
+            onChangeText={answer => this.setState({ answer })}
+          />
+        </View>
+        <TouchableOpacity style={styles.submitBtn} onPress={this.handleSubmit}>
+          <Text style={styles.submitBtnText}>SUBMIT</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center"
+  },
+  submitBtn: {
+    backgroundColor: purple,
+    padding: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    borderRadius: 7,
+    height: 45,
+    marginLeft: 40,
+    marginRight: 40,
+    marginTop: 15
+  },
+  submitBtnText: {
+    fontSize: 22,
+    textAlign: "center",
+    color: white
+  },
+  label: {
+    fontSize: 24,
+    margin: 5,
+    textAlign: "left",
+    color: purple
+  },
+  input: {
+    backgroundColor: white,
+    minWidth: 300,
+    borderRadius: 5,
+    padding: 10,
+    fontSize: 18,
+    margin: 5,
+    marginBottom: 20,
+    borderWidth: 0.5
+  }
+});
 
 function mapStateToProps(decks, { navigation }) {
   const { entryId } = navigation.state.params;

@@ -17,7 +17,7 @@ import { submitCard } from '../utils/api'
 class AddCard extends React.Component {
   static navigationOptions = ({ navigation }) => {
         return {
-            title: 'Add a new card'
+            title: 'Add a New Card'
         }
     }
   state = {
@@ -40,7 +40,7 @@ class AddCard extends React.Component {
       question: "",
       answer: ""
     }));
-    
+
     this.toDeckDetail(entryId)
     submitCard(card, entryId)
   };

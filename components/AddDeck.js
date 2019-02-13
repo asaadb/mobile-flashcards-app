@@ -56,7 +56,7 @@ class AddDeck extends React.Component {
           style={styles.textInput}
         />
         <TouchableOpacity style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn} onPress={this.handleSubmit}>
-          <Text style={styles.submitBtnText}>SUBMIT</Text>
+          <Text style={styles.submitBtnText}>Create Deck</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );

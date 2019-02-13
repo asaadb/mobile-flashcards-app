@@ -22,18 +22,20 @@ class Quiz extends Component {
       return {
         ...state,
         correctAnswers: count,
-        currentIndex: index
+        currentIndex: index,
+        showQuestion: true
       };
-    }, this.toggle());
+    });
   };
   incorrect = () => {
     this.setState(state => {
       const index = state.currentIndex + 1;
       return {
         ...state,
-        currentIndex: index
+        currentIndex: index,
+        showQuestion: true
       };
-    }, this.toggle());
+    });
   };
   toggle = () => {
     this.setState(state => ({

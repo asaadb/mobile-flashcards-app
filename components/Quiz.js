@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Animated, Platform } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Platform } from "react-native";
 import { connect } from "react-redux";
-import { white, lightGray, red, green, black } from '../utils/colors'
+import { white, lightGray, red, green, black, gray } from '../utils/colors'
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -41,10 +41,7 @@ class Quiz extends Component {
     }));
   };
   render() {
-    const { currentIndex } = this.state;
-    const { showQuestion } = this.state;
-    const { questions } = this.state;
-    const { correctAnswers } = this.state;
+    const { currentIndex, showQuestion, questions, correctAnswers, opacity, fontSize } = this.state;
     if (currentIndex < questions.length) {
       const currentQuestion = questions[currentIndex];
       return (
@@ -52,13 +49,13 @@ class Quiz extends Component {
           <Text style={styles.pageNum}>{`${currentIndex + 1} / ${questions.length}`}</Text>
           <View style={styles.container}>
             <View style= {styles.card}>
-              <Text>
+              <Text style = {styles.question}>
                 {showQuestion
                   ? `${currentQuestion.question}`
                   : `${currentQuestion.answer}`}
               </Text>
               <TouchableOpacity onPress={this.toggle}>
-                {showQuestion ? <Text style={{color:green}}>Answer</Text> : <Text style={{color:red}}>Question</Text>}
+                {showQuestion ? <Text style={[styles.toggleText, {color:green}]}>Show Answer</Text> : <Text style={[styles.toggleText, {color:red}]}>Show Question</Text>}
               </TouchableOpacity>
             </View>
             <View>
@@ -84,33 +81,36 @@ class Quiz extends Component {
 const styles = StyleSheet.create({
   pageNum:{
     fontSize:18,
-    margin: 12,
+    margin: 5,
     color:black,
+    marginTop:12,
   },
   container: {
     flex:1,
     alignItems:'center',
     justifyContent:'center',
-  },
-  card:{
-    backgroundColor: white,
+    backgroundColor: '#D0D0D0',
+    margin:15,
+    marginTop:10,
     borderRadius: Platform.OS === "ios" ? 16 : 2,
-    padding: 30,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 17,
-    marginBottom: 30,
-    width: 300,
-    height: 200,
-    justifyContent: "center",
-    alignItems: "center",
     shadowRadius: 3,
     shadowOpacity: 0.8,
     shadowColor: "rgba(0, 0, 0, 0.24)",
     shadowOffset: {
       width: 0,
       height: 3
-    }
+    },
+  },
+  card:{
+    justifyContent: "center",
+    alignItems: "center",
+
+  },
+  question: {
+    textAlign:'center',
+    margin: 10,
+    marginBottom: 40,
+    fontSize:32,
   },
   button:{
     padding: 20,
@@ -124,6 +124,12 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
     color: white,
+  },
+  toggleText: {
+    fontSize:20,
+    textAlign:'center',
+    marginBottom:25,
+    color: black,
   },
   results:{
     fontSize:32,

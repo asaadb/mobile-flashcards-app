@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Platform } from "react-native";
 import { connect } from "react-redux";
-import { white, lightGray, red, green, black, gray } from '../utils/colors'
+import { white, lightGray, red, green, black, gray, blue } from '../utils/colors'
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -42,6 +42,12 @@ class Quiz extends Component {
       showQuestion: !state.showQuestion
     }));
   };
+  resetQuiz = () => {
+    this.setState({
+      correctAnswers:0,
+      currentIndex:0,
+    })
+  }
   render() {
     const { currentIndex, showQuestion, questions, correctAnswers, opacity, fontSize } = this.state;
     if (currentIndex < questions.length) {
@@ -75,6 +81,9 @@ class Quiz extends Component {
     return (
       <View style = {styles.container}>
         <Text style = {styles.results}> {`You got ${correctAnswers} out of ${questions.length}`}</Text>
+        <TouchableOpacity style={[styles.button, {backgroundColor:blue}]} onPress={this.resetQuiz}>
+          <Text style={styles.buttonText}>Start Over</Text>
+        </TouchableOpacity>
       </View>
     );
   }

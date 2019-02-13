@@ -33,6 +33,13 @@ class DecksList extends React.Component {
     if (ready === false) {
       return <AppLoading />;
     }
+    if (Object.keys(decks) < 1 ) {
+      return (
+        <View style={[styles.container, {justifyContent:'center'}]}>
+          <Text style = {styles.title}>You have no decks. Please create a new deck</Text>
+        </View>
+      )
+    }
     return (
       <View style={styles.container}>
         {keys.map(key => (

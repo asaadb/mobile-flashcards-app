@@ -3,6 +3,22 @@ import { StyleSheet, Text, View, TouchableOpacity, Platform } from "react-native
 import { connect } from "react-redux";
 import { white, lightGray, red, green, black, gray, blue } from '../utils/colors'
 
+function shuffle(array) {
+  let currentIndex = array.length;
+  let temporaryValue;
+  let  randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -11,7 +27,7 @@ class Quiz extends Component {
   };
   state = {
     showQuestion: true,
-    questions: this.props.deck.questions,
+    questions: shuffle(this.props.deck.questions),
     currentIndex: 0,
     correctAnswers: 0,
   };
@@ -46,6 +62,7 @@ class Quiz extends Component {
     this.setState({
       correctAnswers:0,
       currentIndex:0,
+      questions: shuffle(this.props.deck.questions),
     })
   }
   render() {

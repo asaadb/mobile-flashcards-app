@@ -10,7 +10,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
 import { white, lightBlue, purple } from './utils/colors'
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from "react-navigation";
 
 function AppStatusBar ({backgroundColor, ...props}) {
@@ -28,7 +28,7 @@ const Tabs = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "Decks",
         tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="ios-bookmarks" size={30} color={tintColor} />
+          <MaterialCommunityIcons name="cards" size={30} color={tintColor} />
         )
       }
     },

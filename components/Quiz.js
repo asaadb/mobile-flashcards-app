@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Platform } from "react-native";
 import { connect } from "react-redux";
+import { clearLocalNotification, setLocalNotification } from "react-redux";
 import { white, lightGray, red, green, black, gray, blue } from '../utils/colors'
 
 function shuffle(array) {
@@ -95,17 +96,21 @@ class Quiz extends Component {
         </View>
       );
     }
-    return (
-      <View style = {styles.container}>
-        <Text style = {styles.results}> {`You got ${correctAnswers} out of ${questions.length}`}</Text>
-        <TouchableOpacity style={[styles.button, {backgroundColor:blue}]} onPress={this.resetQuiz}>
-          <Text style={styles.buttonText}>Start Over</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, {backgroundColor: black, paddingLeft:32, paddingRight:32}]} onPress={() => this.props.navigation.goBack()}>
-          <Text style={styles.buttonText}>Back to Deck</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    else{
+      return (
+        <View style = {styles.container}>
+          <Text style = {styles.results}> {`You got ${correctAnswers} out of ${questions.length}`}</Text>
+          <TouchableOpacity style={[styles.button, {backgroundColor:blue}]} onPress={this.resetQuiz}>
+            <Text style={styles.buttonText}>Start Over</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, {backgroundColor: black, paddingLeft:32, paddingRight:32}]} onPress={() => this.props.navigation.goBack()}>
+            <Text style={styles.buttonText}>Back to Deck</Text>
+          </TouchableOpacity>
+        </View>
+      );
+      clearLocalNotification()
+      .then(setLocalNotification)
+    }
   }
 }
 

@@ -15,7 +15,7 @@ import { white, lightGray, gray, black } from "../utils/colors";
 
 class DecksList extends React.Component {
   state = {
-    ready: false
+    ready: false,
   };
   componentDidMount() {
     const { dispatch } = this.props;
@@ -60,14 +60,14 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
   },
   decks: {
-    backgroundColor: white,
+    backgroundColor: '#D0D0D0',
     borderRadius: Platform.OS === "ios" ? 16 : 2,
     padding: 50,
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 20,
+    marginRight: 20,
     marginTop: 17,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent:"center",
     shadowRadius: 3,
     shadowOpacity: 0.8,
     shadowColor: "rgba(0, 0, 0, 0.24)",

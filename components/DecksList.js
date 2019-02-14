@@ -4,7 +4,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Platform
+  Platform,
+  ScrollView
 } from "react-native";
 import { connect } from "react-redux";
 import { receiveDecks } from "../actions";
@@ -42,19 +43,21 @@ class DecksList extends React.Component {
       )
     }
     return (
-      <View style={styles.container}>
-        {keys.map(key => (
-          <TouchableOpacity key={key} style={styles.decks} onPress={() => this.props.navigation.navigate(
-              'DeckDetail',
-              { entryId: key }
-            )}>
-            <Text style={styles.title}>
-              {decks[key].title}
-            </Text>
-              {decks[key].questions ? getCardsLength(decks[key].questions) : null}
-          </TouchableOpacity>
-        ))}
-      </View>
+      <ScrollView style={{flex:1}}>
+        <View style={styles.container}>
+          {keys.map(key => (
+            <TouchableOpacity key={key} style={styles.decks} onPress={() => this.props.navigation.navigate(
+                'DeckDetail',
+                { entryId: key }
+              )}>
+              <Text style={styles.title}>
+                {decks[key].title}
+              </Text>
+                {decks[key].questions ? getCardsLength(decks[key].questions) : null}
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
     );
   }
 }

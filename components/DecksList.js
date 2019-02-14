@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   Platform,
-  ScrollView
+  ScrollView,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
 import { receiveDecks } from "../actions";
@@ -25,7 +26,11 @@ class DecksList extends React.Component {
       .then(decks => {
         return dispatch(receiveDecks(decks));
       })
-      .then(() => this.setState(() => ({ ready: true })));
+      .then(() => this.setState(() => ({ ready: true })))
+      .catch(error => {
+        console.log(error)
+        return Alert.alert("Sorry, an error occurred while loading the decks");  
+      });
   }
   render() {
     console.log("decks", this.props.decks);

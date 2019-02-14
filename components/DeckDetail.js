@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { getCardsLength } from "../utils/helpers";
-import { gray, purple, white, blue, black, lightGray, red } from "../utils/colors";
+import { white, blue, navyBlue, lightGray } from "../utils/colors";
 
 class DeckDetail extends Component {
     render() {
@@ -29,7 +29,7 @@ class DeckDetail extends Component {
               <Text style={ styles.buttonText }>Start Quiz</Text>
             </TouchableOpacity>
             }
-            <TouchableOpacity style={[styles.button, { backgroundColor: black }]}  onPress={() => this.props.navigation.navigate(
+            <TouchableOpacity style={[styles.button, { backgroundColor: navyBlue }]}  onPress={() => this.props.navigation.navigate(
                 'AddCard',
                 { entryId: entryId}
               )}>

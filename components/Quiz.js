@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Platform, Animated } from "react-native";
 import { connect } from "react-redux";
 import { clearLocalNotification, setLocalNotification } from "react-redux";
-import { white, lightGray, red, green, black, gray, blue } from '../utils/colors'
+import { white, lightGray, red, green, navyBlue, gray, blue } from '../utils/colors'
 
 function shuffle(array) {
   let currentIndex = array.length;
@@ -113,7 +113,7 @@ class Quiz extends Component {
           <TouchableOpacity style={[styles.button, {backgroundColor:blue}]} onPress={this.resetQuiz}>
             <Text style={styles.buttonText}>Start Over</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, {backgroundColor: black, paddingLeft:32, paddingRight:32}]} onPress={() => this.props.navigation.goBack()}>
+          <TouchableOpacity style={[styles.button, {backgroundColor: navyBlue, paddingLeft:32, paddingRight:32}]} onPress={() => this.props.navigation.goBack()}>
             <Text style={styles.buttonText}>Back to Deck</Text>
           </TouchableOpacity>
         </View>
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   pageNum:{
     fontSize:18,
     margin: 5,
-    color:black,
+    color:navyBlue,
     marginTop:12,
   },
   container: {
@@ -175,14 +175,14 @@ const styles = StyleSheet.create({
     fontSize:20,
     textAlign:'center',
     marginBottom:25,
-    color: black,
+    color: navyBlue,
   },
   results:{
     fontSize:32,
     textAlign:'center',
     margin:10,
     marginBottom:30,
-    color: black,
+    color: navyBlue,
   },
 })
 function mapStateToProps(decks, { navigation }) {

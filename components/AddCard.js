@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Platform
 } from "react-native";
-import { white, lightGray, purple } from "../utils/colors";
+import { white, blue2 } from "../utils/colors";
 import { addCard } from "../actions";
 import { connect } from "react-redux";
 import { submitCard } from "../utils/api";
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   submitBtn: {
-    backgroundColor: purple,
+    backgroundColor: blue2,
     padding: 10,
     paddingLeft: 30,
     paddingRight: 30,
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     margin: 5,
     textAlign: "left",
-    color: purple
+    color: blue2
   },
   input: {
     backgroundColor: white,

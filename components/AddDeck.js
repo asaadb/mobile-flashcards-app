@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Platform
 } from "react-native";
-import { white, lightGray, purple} from "../utils/colors";
+import { white, lightGray, blue2} from "../utils/colors";
 import { addDeck } from "../actions";
 import { submitDeck } from "../utils/api";
 import { connect } from "react-redux";
@@ -47,7 +47,7 @@ class AddDeck extends React.Component {
     console.log("Props ", this.props);
     return (
       <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
-        <Text style={{ fontSize: 31, margin: 40, textAlign:'center', color:purple }}>What is the title of your new deck?</Text>
+        <Text style={{ fontSize: 31, margin: 40, textAlign:'center', color:blue2 }}>What is the title of your new deck?</Text>
         <TextInput
           autoFocus
           placeholder="Deck Name"
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
   },
 iosSubmitBtn: {
-  backgroundColor: purple,
+  backgroundColor: blue2,
   padding: 10,
   paddingLeft: 30,
   paddingRight: 30,
@@ -81,7 +81,7 @@ iosSubmitBtn: {
 
 },
 AndroidSubmitBtn: {
-  backgroundColor: purple,
+  backgroundColor: blue2,
   padding: 10,
   paddingLeft: 30,
   paddingRight: 30,

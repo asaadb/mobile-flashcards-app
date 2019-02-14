@@ -11,10 +11,9 @@ import {
 import { connect } from "react-redux";
 import { receiveDecks } from "../actions";
 import { fetchDecks } from "../utils/api";
-import { clearAsyncStorage } from "../utils/api";
 import { getCardsLength } from "../utils/helpers";
 import { AppLoading } from "expo";
-import { white, lightGray, gray, black } from "../utils/colors";
+import { white, lightGray, gray, navyBlue } from "../utils/colors";
 
 class DecksList extends React.Component {
   state = {
@@ -29,7 +28,7 @@ class DecksList extends React.Component {
       .then(() => this.setState(() => ({ ready: true })))
       .catch(error => {
         console.log(error)
-        return Alert.alert("Sorry, an error occurred while loading the decks");  
+        return Alert.alert("Sorry, an error occurred while loading the decks");
       });
   }
   render() {
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
       height: 3
     },
   },
-  title: { color: black, fontSize: 28, margin: 5, textAlign:'center' }
+  title: { color: navyBlue, fontSize: 28, margin: 5, textAlign:'center' }
 });
 
 function mapStateToProps(decks) {

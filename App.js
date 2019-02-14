@@ -9,7 +9,7 @@ import DeckDetail from "./components/DeckDetail";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
-import { white, lightBlue, purple } from './utils/colors'
+import { white, lightBlue, blue2 } from './utils/colors'
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from "react-navigation";
 import { setLocalNotification } from './utils/helpers'
@@ -48,10 +48,10 @@ const Tabs = createBottomTabNavigator(
       header: null
     },
     tabBarOptions: {
-      activeTintColor: Platform.OS === "ios" ? purple : white,
+      activeTintColor: Platform.OS === "ios" ? blue2 : white,
       style: {
         height: 56,
-        backgroundColor: Platform.OS === "ios" ? white : purple,
+        backgroundColor: Platform.OS === "ios" ? white : blue2,
         shadowColor: "rgba(0, 0, 0, 0.24)",
         shadowOffset: {
           width: 0,
@@ -77,7 +77,7 @@ const MainNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: blue2,
       },
     }),
   },
@@ -86,7 +86,7 @@ const MainNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: blue2,
       },
     }),
   },
@@ -95,7 +95,7 @@ const MainNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: blue2,
       },
     }),
   },
@@ -111,7 +111,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
-          <AppStatusBar backgroundColor={purple} barStyle="light-content" />
+          <AppStatusBar backgroundColor={blue2} barStyle="light-content" />
           <TabsContainer />
         </View>
       </Provider>

@@ -1,6 +1,7 @@
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, Text } from 'react-native'
+import React from 'react'
 import { Notifications, Permissions } from 'expo'
-
+import { gray } from "../utils/colors";
 const NOTIFICATION_KEY = 'MobileFlashCards:notifications'
 
 export function formatResults (results) {
@@ -72,4 +73,25 @@ export function setLocalNotification () {
           })
       }
     })
+}
+
+export function getCardsLength(questions) {
+  if(questions.length === 0) {
+    return (
+      <Text style={{ color: gray, fontSize: 22, margin: 10, textAlign:'center' }}>
+        0 Cards
+      </Text>
+    )
+  } else if (questions.length === 1) {
+    return (
+      <Text style={{ color: gray, fontSize: 22, margin: 10, textAlign:'center' }}>
+        1 Card
+      </Text>
+    )
+  }
+  return (
+    <Text style={{ color: gray, fontSize: 22, margin: 10, textAlign:'center' }}>
+      {questions.length} Cards
+    </Text>
+  )
 }

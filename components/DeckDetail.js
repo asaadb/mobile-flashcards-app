@@ -7,19 +7,18 @@ import {
   TouchableOpacity
 } from "react-native";
 import { connect } from "react-redux";
-import { gray, purple, white, blue, black, lightGray } from "../utils/colors";
+import { getCardsLength } from "../utils/helpers";
+import { gray, purple, white, blue, black, lightGray, red } from "../utils/colors";
 
 class DeckDetail extends Component {
     render() {
-      console.log("Props ", this.props)
       const { title, questions } = this.props.deck
       const { entryId } = this.props
-      console.log('The entryId:',questions)
       return (
         <View style={styles.container}>
           <View>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.cards}>{questions ? questions.length: 0} Cards </Text>
+              {questions ? getCardsLength(questions) : null}
           </View>
           <View>
             {questions.length > 0 &&
@@ -53,12 +52,6 @@ const styles = StyleSheet.create({
     textAlign:'center',
     fontSize: 32,
     margin: 5
-  },
-  cards:{
-    fontSize: 23,
-    color: gray,
-    textAlign:'center',
-     margin: 10
   },
   button:{
     padding: 20,

@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { receiveDecks } from "../actions";
 import { fetchDecks } from "../utils/api";
 import { clearAsyncStorage } from "../utils/api";
+import { getCardsLength } from "../utils/helpers";
 import { AppLoading } from "expo";
 import { white, lightGray, gray, black } from "../utils/colors";
 
@@ -50,9 +51,7 @@ class DecksList extends React.Component {
             <Text style={styles.title}>
               {decks[key].title}
             </Text>
-            <Text style={{ color: gray, fontSize: 18 }}>
-              {decks[key].questions ? decks[key].questions.length : 0} Cards
-            </Text>
+              {decks[key].questions ? getCardsLength(decks[key].questions) : null}
           </TouchableOpacity>
         ))}
       </View>

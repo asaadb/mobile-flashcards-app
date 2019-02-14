@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Platform } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Platform, Animated } from "react-native";
 import { connect } from "react-redux";
 import { clearLocalNotification, setLocalNotification } from "react-redux";
 import { white, lightGray, red, green, black, gray, blue } from '../utils/colors'
@@ -31,6 +31,7 @@ class Quiz extends Component {
     questions: shuffle(this.props.deck.questions),
     currentIndex: 0,
     correctAnswers: 0,
+    animatedValue: new Animated.Value(0)
   };
   correct = () => {
     this.setState(state => {
@@ -66,8 +67,15 @@ class Quiz extends Component {
       questions: shuffle(this.props.deck.questions),
     })
   }
+  handleAnimation = () => {
+    Animated.spring(this.state.animatedValue, {
+      toValue: 1,
+      friction: 4,
+      duration: 1000,
+    }).start()
+  }
   render() {
-    const { currentIndex, showQuestion, questions, correctAnswers, opacity, fontSize } = this.state;
+    const { currentIndex, showQuestion, questions, correctAnswers, opacity, fontSize, animatedValue } = this.state;
     if (currentIndex < questions.length) {
       const currentQuestion = questions[currentIndex];
       return (
@@ -97,9 +105,11 @@ class Quiz extends Component {
       );
     }
     else{
+      this.handleAnimation()
       return (
         <View style = {styles.container}>
-          <Text style = {styles.results}> {`You got ${correctAnswers} out of ${questions.length}`}</Text>
+          <Animated.Text style = {[styles.results, {transform: [{scale: animatedValue}]}]}> {`You got ${correctAnswers} out of ${questions.length}`}
+          </Animated.Text>
           <TouchableOpacity style={[styles.button, {backgroundColor:blue}]} onPress={this.resetQuiz}>
             <Text style={styles.buttonText}>Start Over</Text>
           </TouchableOpacity>
@@ -171,6 +181,7 @@ const styles = StyleSheet.create({
     fontSize:32,
     textAlign:'center',
     margin:10,
+    marginBottom:30,
     color: black,
   },
 })

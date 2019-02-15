@@ -4,40 +4,38 @@ import { connect } from "react-redux";
 import { getCardsLength } from "../utils/helpers";
 import { white, blue, navyBlue, lightGray } from "../utils/colors";
 
-class DeckDetail extends Component {
-  render() {
-    const { title, questions } = this.props.deck;
-    const { entryId } = this.props;
-    return (
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.title}>{title}</Text>
-          {questions ? getCardsLength(questions) : null}
-        </View>
-        <View>
-          {questions.length > 0 && (
-            <TouchableOpacity
-              style={[styles.button, { backgroundColor: blue }]}
-              onPress={() =>
-                this.props.navigation.navigate("Quiz", { entryId: entryId })
-              }
-            >
-              <Text style={styles.buttonText}>Start Quiz</Text>
-            </TouchableOpacity>
-          )}
+const DeckDetail = props => {
+  const { title, questions } = props.deck;
+  const { entryId } = props;
+  return (
+    <View style={styles.container}>
+      <View>
+        <Text style={styles.title}>{title}</Text>
+        {questions ? getCardsLength(questions) : null}
+      </View>
+      <View>
+        {questions.length > 0 && (
           <TouchableOpacity
-            style={[styles.button, { backgroundColor: navyBlue }]}
+            style={[styles.button, { backgroundColor: blue }]}
             onPress={() =>
-              this.props.navigation.navigate("AddCard", { entryId: entryId })
+              props.navigation.navigate("Quiz", { entryId: entryId })
             }
           >
-            <Text style={styles.buttonText}>Add a Card</Text>
+            <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
-        </View>
+        )}
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: navyBlue }]}
+          onPress={() =>
+            props.navigation.navigate("AddCard", { entryId: entryId })
+          }
+        >
+          <Text style={styles.buttonText}>Add a Card</Text>
+        </TouchableOpacity>
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

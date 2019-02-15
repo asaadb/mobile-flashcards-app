@@ -1,14 +1,28 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Platform, Animated } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Platform,
+  Animated
+} from "react-native";
 import { connect } from "react-redux";
 import { clearLocalNotification, setLocalNotification } from "react-redux";
-import { white, lightGray, red, green, navyBlue, gray, blue } from '../utils/colors'
+import {
+  white,
+  lightGray,
+  red,
+  green,
+  navyBlue,
+  gray,
+  blue
+} from "../utils/colors";
 
 function shuffle(array) {
   let currentIndex = array.length;
   let temporaryValue;
-  let  randomIndex;
-
+  let randomIndex;
   while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
@@ -16,7 +30,6 @@ function shuffle(array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-
   return array;
 }
 
@@ -62,82 +75,117 @@ class Quiz extends Component {
   };
   resetQuiz = () => {
     this.setState({
-      correctAnswers:0,
-      currentIndex:0,
-      questions: shuffle(this.props.deck.questions),
-    })
-  }
+      correctAnswers: 0,
+      currentIndex: 0,
+      questions: shuffle(this.props.deck.questions)
+    });
+  };
   handleAnimation = () => {
     Animated.spring(this.state.animatedValue, {
       toValue: 1,
       friction: 4,
-      duration: 1000,
-    }).start()
-  }
+      duration: 1000
+    }).start();
+  };
   render() {
-    const { currentIndex, showQuestion, questions, correctAnswers, opacity, fontSize, animatedValue } = this.state;
+    const {
+      currentIndex,
+      showQuestion,
+      questions,
+      correctAnswers,
+      opacity,
+      fontSize,
+      animatedValue
+    } = this.state;
     if (currentIndex < questions.length) {
       const currentQuestion = questions[currentIndex];
       return (
-        <View style={{flex:1, backgroundColor:lightGray}}>
-          <Text style={styles.pageNum}>{`${currentIndex + 1} / ${questions.length}`}</Text>
+        <View style={{ flex: 1, backgroundColor: lightGray }}>
+          <Text style={styles.pageNum}>{`${currentIndex + 1} / ${
+            questions.length
+          }`}</Text>
           <View style={styles.container}>
-            <View style= {styles.card}>
-              <Text style = {styles.question}>
+            <View style={styles.card}>
+              <Text style={styles.question}>
                 {showQuestion
                   ? `${currentQuestion.question}`
                   : `${currentQuestion.answer}`}
               </Text>
               <TouchableOpacity onPress={this.toggle}>
-                {showQuestion ? <Text style={[styles.toggleText, {color:green}]}>Show Answer</Text> : <Text style={[styles.toggleText, {color:red}]}>Show Question</Text>}
+                {showQuestion ? (
+                  <Text style={[styles.toggleText, { color: green }]}>
+                    Show Answer
+                  </Text>
+                ) : (
+                  <Text style={[styles.toggleText, { color: red }]}>
+                    Show Question
+                  </Text>
+                )}
               </TouchableOpacity>
             </View>
             <View>
-              <TouchableOpacity style={[styles.button, {backgroundColor:green}]} onPress={this.correct}>
+              <TouchableOpacity
+                style={[styles.button, { backgroundColor: green }]}
+                onPress={this.correct}
+              >
                 <Text style={styles.buttonText}>Correct</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, {backgroundColor:red}]} onPress={this.incorrect}>
+              <TouchableOpacity
+                style={[styles.button, { backgroundColor: red }]}
+                onPress={this.incorrect}
+              >
                 <Text style={styles.buttonText}>Incorrect</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
       );
-    }
-    else{
-      this.handleAnimation()
+    } else {
+      this.handleAnimation();
       return (
-        <View style = {styles.container}>
-          <Animated.Text style = {[styles.results, {transform: [{scale: animatedValue}]}]}> {`You got ${correctAnswers} out of ${questions.length}`}
+        <View style={styles.container}>
+          <Animated.Text
+            style={[styles.results, { transform: [{ scale: animatedValue }] }]}
+          >
+            {" "}
+            {`You got ${correctAnswers} out of ${questions.length}`}
           </Animated.Text>
-          <TouchableOpacity style={[styles.button, {backgroundColor:blue}]} onPress={this.resetQuiz}>
+          <TouchableOpacity
+            style={[styles.button, { backgroundColor: blue }]}
+            onPress={this.resetQuiz}
+          >
             <Text style={styles.buttonText}>Start Over</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, {backgroundColor: navyBlue, paddingLeft:32, paddingRight:32}]} onPress={() => this.props.navigation.goBack()}>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              { backgroundColor: navyBlue, paddingLeft: 32, paddingRight: 32 }
+            ]}
+            onPress={() => this.props.navigation.goBack()}
+          >
             <Text style={styles.buttonText}>Back to Deck</Text>
           </TouchableOpacity>
         </View>
       );
-      clearLocalNotification()
-      .then(setLocalNotification)
+      clearLocalNotification().then(setLocalNotification);
     }
   }
 }
 
 const styles = StyleSheet.create({
-  pageNum:{
-    fontSize:18,
+  pageNum: {
+    fontSize: 18,
     margin: 5,
-    color:navyBlue,
-    marginTop:12,
+    color: navyBlue,
+    marginTop: 12
   },
   container: {
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center',
-    backgroundColor: '#D0D0D0',
-    margin:15,
-    marginTop:10,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#D0D0D0",
+    margin: 15,
+    marginTop: 10,
     borderRadius: Platform.OS === "ios" ? 16 : 2,
     shadowRadius: 3,
     shadowOpacity: 0.8,
@@ -145,46 +193,46 @@ const styles = StyleSheet.create({
     shadowOffset: {
       width: 0,
       height: 3
-    },
+    }
   },
-  card:{
+  card: {
     justifyContent: "center",
-    alignItems: "center",
-
+    alignItems: "center"
   },
   question: {
-    textAlign:'center',
+    textAlign: "center",
     margin: 10,
     marginBottom: 40,
-    fontSize:25,
+    fontSize: 25
   },
-  button:{
+  button: {
     padding: 20,
     borderRadius: 7,
     height: 65,
     margin: 8,
-    paddingLeft:45,
-    paddingRight:45,
+    paddingLeft: 45,
+    paddingRight: 45
   },
-  buttonText:{
+  buttonText: {
     fontSize: 22,
-    textAlign: 'center',
-    color: white,
+    textAlign: "center",
+    color: white
   },
   toggleText: {
-    fontSize:20,
-    textAlign:'center',
-    marginBottom:25,
-    color: navyBlue,
+    fontSize: 20,
+    textAlign: "center",
+    marginBottom: 25,
+    color: navyBlue
   },
-  results:{
-    fontSize:32,
-    textAlign:'center',
-    margin:10,
-    marginBottom:30,
-    color: navyBlue,
-  },
-})
+  results: {
+    fontSize: 32,
+    textAlign: "center",
+    margin: 10,
+    marginBottom: 30,
+    color: navyBlue
+  }
+});
+
 function mapStateToProps(decks, { navigation }) {
   const { entryId } = navigation.state.params;
   return {

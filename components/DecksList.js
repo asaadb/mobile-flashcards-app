@@ -17,7 +17,7 @@ import { white, lightGray, gray, navyBlue } from "../utils/colors";
 
 class DecksList extends React.Component {
   state = {
-    ready: false,
+    ready: false
   };
   componentDidMount() {
     const { dispatch } = this.props;
@@ -27,7 +27,7 @@ class DecksList extends React.Component {
       })
       .then(() => this.setState(() => ({ ready: true })))
       .catch(error => {
-        console.log(error)
+        console.log(error);
         return Alert.alert("Sorry, an error occurred while loading the decks");
       });
   }
@@ -39,25 +39,30 @@ class DecksList extends React.Component {
     if (ready === false) {
       return <AppLoading />;
     }
-    if (Object.keys(decks) < 1 ) {
+    if (Object.keys(decks) < 1) {
       return (
-        <View style={[styles.container, {justifyContent:'center'}]}>
-          <Text style = {styles.title}>You have no decks. Please create a new deck</Text>
+        <View style={[styles.container, { justifyContent: "center" }]}>
+          <Text style={styles.title}>
+            You have no decks. Please create a new deck
+          </Text>
         </View>
-      )
+      );
     }
     return (
-      <ScrollView style={{flex:1}}>
+      <ScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           {keys.map(key => (
-            <TouchableOpacity key={key} style={styles.decks} onPress={() => this.props.navigation.navigate(
-                'DeckDetail',
-                { entryId: key }
-              )}>
-              <Text style={styles.title}>
-                {decks[key].title}
-              </Text>
-                {decks[key].questions ? getCardsLength(decks[key].questions) : null}
+            <TouchableOpacity
+              key={key}
+              style={styles.decks}
+              onPress={() =>
+                this.props.navigation.navigate("DeckDetail", { entryId: key })
+              }
+            >
+              <Text style={styles.title}>{decks[key].title}</Text>
+              {decks[key].questions
+                ? getCardsLength(decks[key].questions)
+                : null}
             </TouchableOpacity>
           ))}
         </View>
@@ -70,26 +75,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: lightGray,
-    alignItems: "stretch",
+    alignItems: "stretch"
   },
   decks: {
-    backgroundColor: '#D0D0D0',
+    backgroundColor: "#D0D0D0",
     borderRadius: Platform.OS === "ios" ? 16 : 2,
     padding: 50,
     marginLeft: 20,
     marginRight: 20,
     marginTop: 17,
     alignItems: "center",
-    justifyContent:"center",
+    justifyContent: "center",
     shadowRadius: 3,
     shadowOpacity: 0.8,
     shadowColor: "rgba(0, 0, 0, 0.24)",
     shadowOffset: {
       width: 0,
       height: 3
-    },
+    }
   },
-  title: { color: navyBlue, fontSize: 28, margin: 5, textAlign:'center' }
+  title: {
+    color: navyBlue,
+    fontSize: 28,
+    margin: 5,
+    textAlign: "center"
+  }
 });
 
 function mapStateToProps(decks) {

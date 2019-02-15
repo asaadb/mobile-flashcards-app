@@ -6,8 +6,7 @@ import {
   KeyboardAvoidingView,
   Alert,
   TextInput,
-  TouchableOpacity,
-  Platform
+  TouchableOpacity
 } from "react-native";
 import { white, blue2 } from "../utils/colors";
 import { addCard } from "../actions";
@@ -40,7 +39,6 @@ class AddCard extends React.Component {
       question: "",
       answer: ""
     }));
-
     this.toDeckDetail(entryId);
     submitCard(card, entryId);
   };
@@ -76,6 +74,7 @@ class AddCard extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

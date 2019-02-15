@@ -12,7 +12,6 @@ export default function decks(state = {}, action) {
         ...state,
         ...action.deck
       };
-
     case ADD_CARD:
       const newState = { ...state };
       newState[action.id].questions.push(action.card);

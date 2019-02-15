@@ -9,12 +9,6 @@ export function fetchDecks() {
 }
 export function submitDeck(deck) {
   return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(deck))
-    .then(results => {
-      console.log('Results: ', results)
-    })
-}
-export function clearAsyncStorage () {
-   AsyncStorage.clear();
 }
 export function submitCard(card, id) {
   AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {

@@ -24,7 +24,6 @@ class AddDeck extends React.Component {
     if (!title || title === "") {
       return Alert.alert("Please Enter a Title For your New Deck");
     }
-    console.log("Submit title: ", title);
     const { dispatch } = this.props;
     const newDeck = formatDeck(title);
     const entryId = Object.keys(newDeck)[0];
@@ -44,7 +43,6 @@ class AddDeck extends React.Component {
     this.props.navigation.navigate("DeckDetail", { entryId: entryId });
   };
   render() {
-    console.log("Props ", this.props);
     return (
       <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
         <Text style={styles.title}>What is the title of your new deck?</Text>

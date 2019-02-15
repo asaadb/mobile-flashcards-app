@@ -32,7 +32,6 @@ class DecksList extends React.Component {
       });
   }
   render() {
-    console.log("decks", this.props.decks);
     const { decks } = this.props;
     const keys = Object.keys(decks);
     const { ready } = this.state;

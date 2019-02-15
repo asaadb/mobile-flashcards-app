@@ -23,6 +23,11 @@ class AddCard extends React.Component {
     question: "",
     answer: ""
   };
+  handleTextChange = (text, key) => {
+    this.setState({
+      [key]:text
+    })
+  }
   handleSubmit = () => {
     const { question, answer } = this.state;
     if (!question || question === "") {
@@ -55,7 +60,7 @@ class AddCard extends React.Component {
             style={styles.input}
             placeholder="Enter a Question"
             value={this.state.question}
-            onChangeText={question => this.setState({ question })}
+            onChangeText={question => this.handleTextChange(question, 'question')}
           />
         </View>
         <View>
@@ -64,7 +69,7 @@ class AddCard extends React.Component {
             style={styles.input}
             placeholder="Enter an Answer"
             value={this.state.answer}
-            onChangeText={answer => this.setState({ answer })}
+            onChangeText={answer => this.handleTextChange(answer, 'answer') }
           />
         </View>
         <TouchableOpacity style={styles.submitBtn} onPress={this.handleSubmit}>

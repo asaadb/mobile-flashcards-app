@@ -7,13 +7,13 @@ This is a mobile application that allows users to study collections of flashcard
 
 ## Installing
 
-This assumes that you have Expo installed. For more information, read the [Expo documentation](https://github.com/reduxjs/redux)
+This assumes that you have Expo installed. For more information, read the [Expo documentation](https://docs.expo.io/versions/latest/)
 
 To run the project in your local machine:
 
 * Download or clone the repository in your computer:
 ```
-$ git clone https://github.com/dimikara/React-Neighborhood-Map-3.git
+$ git clone https://github.com/asaadb/mobile-flashcards-app.git
 ```
 
 * Navigate to the repository directory in your terminal
@@ -34,7 +34,7 @@ yarn start
 
 ## Supported Platforms
 
-While Mobile Flashcards should work on all iOS and Android devices, it has been official tested of the following:
+While Mobile Flashcards App should work on all iOS and Android devices, it has been officially tested of the following devices:
 - iPhone 6
 - iPhone 7
 

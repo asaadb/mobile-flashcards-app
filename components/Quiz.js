@@ -16,8 +16,10 @@ import {
   green,
   navyBlue,
   gray,
-  blue
+  blue,
+  black
 } from "../utils/colors";
+import FlipCard from "react-native-flip-card";
 
 function shuffle(array) {
   let currentIndex = array.length;
@@ -72,6 +74,7 @@ class Quiz extends Component {
     this.setState(state => ({
       showQuestion: !state.showQuestion
     }));
+    this.flip._toggleCard();
   };
   resetQuiz = () => {
     this.setState({
@@ -105,24 +108,30 @@ class Quiz extends Component {
             questions.length
           }`}</Text>
           <View style={styles.container}>
-            <View style={styles.card}>
-              <Text style={styles.question}>
-                {showQuestion
-                  ? `${currentQuestion.question}`
-                  : `${currentQuestion.answer}`}
-              </Text>
-              <TouchableOpacity onPress={this.toggle}>
-                {showQuestion ? (
-                  <Text style={[styles.toggleText, { color: green }]}>
-                    Show Answer
-                  </Text>
-                ) : (
-                  <Text style={[styles.toggleText, { color: red }]}>
-                    Show Question
-                  </Text>
-                )}
-              </TouchableOpacity>
-            </View>
+            <FlipCard
+              style={styles.card}
+              friction={6}
+              perspective={1000}
+              flipHorizontal={true}
+              flipVertical={false}
+              flip={false}
+              clickable={false}
+              ref={flip => (this.flip = flip)}
+            >
+              <Text style={styles.cardText}>{currentQuestion.question}</Text>
+              <Text style={styles.cardText}>{currentQuestion.answer}</Text>
+            </FlipCard>
+            <TouchableOpacity onPress={this.toggle}>
+              {showQuestion ? (
+                <Text style={[styles.toggleText, { color: green }]}>
+                  Show Answer
+                </Text>
+              ) : (
+                <Text style={[styles.toggleText, { color: red }]}>
+                  Show Question
+                </Text>
+              )}
+            </TouchableOpacity>
             <View>
               <TouchableOpacity
                 style={[styles.button, { backgroundColor: green }]}
@@ -147,7 +156,6 @@ class Quiz extends Component {
           <Animated.Text
             style={[styles.results, { transform: [{ scale: animatedValue }] }]}
           >
-            {" "}
             {`You got ${correctAnswers} out of ${questions.length}`}
           </Animated.Text>
           <TouchableOpacity
@@ -181,29 +189,34 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#D0D0D0",
+    alignItems: "center",
     margin: 15,
-    marginTop: 10,
+    marginTop: 0
+  },
+  card: {
+    maxHeight: 210,
+    width: 315,
     borderRadius: Platform.OS === "ios" ? 16 : 2,
     shadowRadius: 3,
+    margin: 0,
+    marginBottom: 20,
     shadowOpacity: 0.8,
+    backgroundColor: "#D0D0D0",
+    borderWidth: 0,
     shadowColor: "rgba(0, 0, 0, 0.24)",
     shadowOffset: {
       width: 0,
       height: 3
     }
   },
-  card: {
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  question: {
+  cardText: {
+    fontSize: 24,
     textAlign: "center",
+    color: black,
     margin: 10,
     marginBottom: 40,
-    fontSize: 25
+    marginTop: 30
   },
   button: {
     padding: 20,

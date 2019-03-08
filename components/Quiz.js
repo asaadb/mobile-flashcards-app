@@ -8,7 +8,7 @@ import {
   Animated
 } from "react-native";
 import { connect } from "react-redux";
-import { clearLocalNotification, setLocalNotification } from "react-redux";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 import {
   white,
   lightGray,
@@ -151,6 +151,7 @@ class Quiz extends Component {
       );
     } else {
       this.handleAnimation();
+      clearLocalNotification().then(setLocalNotification);
       return (
         <View style={styles.container}>
           <Animated.Text
@@ -175,7 +176,6 @@ class Quiz extends Component {
           </TouchableOpacity>
         </View>
       );
-      clearLocalNotification().then(setLocalNotification);
     }
   }
 }

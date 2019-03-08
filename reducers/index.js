@@ -1,4 +1,4 @@
-import { RECIEVE_DECKS, ADD_DECK, ADD_CARD } from "../actions";
+import { RECIEVE_DECKS, ADD_DECK, REMOVE_DECK, ADD_CARD } from "../actions";
 
 export default function decks(state = {}, action) {
   switch (action.type) {
@@ -12,6 +12,10 @@ export default function decks(state = {}, action) {
         ...state,
         ...action.deck
       };
+    case REMOVE_DECK:
+      const updatedState = { ...state };
+      delete updatedState[action.entryId]
+      return updatedState
     case ADD_CARD:
       const newState = { ...state };
       newState[action.id].questions.push(action.card);

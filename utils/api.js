@@ -17,3 +17,10 @@ export function submitCard(card, id) {
     AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data));
   });
 }
+export function deleteDeck(entryId) {
+  AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
+    const data = JSON.parse(results);
+    delete data[entryId]
+    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data));
+  });
+}

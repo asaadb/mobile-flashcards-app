@@ -2,11 +2,22 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { getCardsLength } from "../utils/helpers";
-import { white, blue, navyBlue, lightGray } from "../utils/colors";
+import { white, blue, navyBlue, lightGray, red } from "../utils/colors";
+import { removeDeck } from "../actions/index"
+import { deleteDeck } from "../utils/api";
 
-const DeckDetail = props => {
-  const { title, questions } = props.deck;
-  const { entryId } = props;
+class DeckDetail extends Component {
+  handleDelete = () => {
+    const { entryId, dispatch } = this.props
+    dispatch(removeDeck(entryId))
+    deleteDeck(entryId)
+  }
+  render() {
+    if(!this.props.deck) {
+      return this.props.navigation.navigate("DecksList")
+    }
+  const { title, questions } = this.props.deck;
+  const { entryId } = this.props;
   return (
     <View style={styles.container}>
       <View>
@@ -18,7 +29,7 @@ const DeckDetail = props => {
           <TouchableOpacity
             style={[styles.button, { backgroundColor: blue }]}
             onPress={() =>
-              props.navigation.navigate("Quiz", { entryId: entryId })
+              this.props.navigation.navigate("Quiz", { entryId: entryId })
             }
           >
             <Text style={styles.buttonText}>Start Quiz</Text>
@@ -27,15 +38,22 @@ const DeckDetail = props => {
         <TouchableOpacity
           style={[styles.button, { backgroundColor: navyBlue }]}
           onPress={() =>
-            props.navigation.navigate("AddCard", { entryId: entryId })
+            this.props.navigation.navigate("AddCard", { entryId: entryId })
           }
         >
           <Text style={styles.buttonText}>Add a Card</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: red }]}
+          onPress={this.handleDelete}
+        >
+          <Text style={styles.buttonText}>Delete Deck</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -47,7 +47,7 @@ While Mobile Flashcards App should work on all iOS and Android devices, it has b
 ![new deck](./images/newDeck.PNG "Screenshot")
 
 ### Deck Detail View
-![deck detail](./images/DeckDetail.PNG "Screenshot")
+![deck detail](./images/deckDetail.PNG "Screenshot")
 
 ### New Card Form View
 ![new card](./images/newCard.PNG "Screenshot")

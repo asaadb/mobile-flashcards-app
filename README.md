@@ -38,6 +38,24 @@ While Mobile Flashcards App should work on all iOS and Android devices, it has b
 - iPhone 6
 - iPhone 7
 
+## Screenshots
+
+### Deck List View
+![deck list](./images/deckList.PNG "Screenshot")
+
+### New Deck Form View
+![new deck](./images/newDeck.PNG "Screenshot")
+
+### Deck Detail View
+![deck detail](./images/DeckDetail.PNG "Screenshot")
+
+### New Card Form View
+![new card](./images/newCard.PNG "Screenshot")
+
+### Quiz View
+![quiz](./images/quiz.PNG "Screenshot")
+
+
 ## Tools & dependencies
 
 * [Expo](https://expo.io/)
